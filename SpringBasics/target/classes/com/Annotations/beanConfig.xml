@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<bean id="logger" class="com.Annotations.Logger"></bean>
+	
+	<!-- commenting the below bean to test auto bean declaration-->
+	<!-- <bean id="consoleLog" class="com.Annotations.ConsoleLog"><qualifier value="useThis"></qualifier></bean>-->
+	<!-- <bean id="consoleLog2" class="com.Annotations.ConsoleLog"></bean>-->
+	
+	<!-- comment below bean to test required in @Autowired -->
+	<bean id="fileLog" class="com.Annotations.FileLog"></bean>
+	
+	<!-- add context namespace and annotation-config to use annotations
+	 to add those better use IDE UI options in overview and context tabs below -->
+	<context:annotation-config></context:annotation-config>
+	
+	<!-- below context is used for automatic bean creation -->
+	<context:component-scan base-package="com.Annotations"></context:component-scan>
+</beans>

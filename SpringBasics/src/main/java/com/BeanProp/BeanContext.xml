@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- p namespace will reduce number of lines
+		p:id="01" p:name="person1" equivalent to below 2 lines
+		<property name="id" value="01"></property>
+		<property name="name" value="first person"></property>
+	-->
+	<bean id="singleton1" class="com.BeanProp.Person" scope="singleton"
+		p:id="01" p:name="person1">
+	</bean>
+	<bean id="request" class="com.BeanProp.Person" scope="request">
+		<property name="id" value="02"></property>
+		<property name="name" value="person2"></property>
+	</bean>
+	<bean id="prototype" class="com.BeanProp.Person" scope="prototype">
+		<property name="id" value="03"></property>
+		<property name="name" value="person3"></property>
+	</bean>
+	<bean id="session" class="com.BeanProp.Person" scope="session">
+		<property name="id" value="04"></property>
+		<property name="name" value="person4"></property>
+	</bean>
+
+
+</beans>

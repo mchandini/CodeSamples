@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- first factory method will be called by the bean to create object
+		 init method will be called on creation of object
+		 destroy method will be called after destroying the bean -->
+	<bean id="person" class="com.BeanConfigMethods.Person"
+		init-method="onCreate" destroy-method="onDestroy"
+		 factory-method="getInstance">
+		 <constructor-arg name="id" value="2"></constructor-arg>
+		 <constructor-arg name="name" value="person2"></constructor-arg>
+	</bean>
+	
+	<!-- A bean with id same as the factory-bean value is required for factory class
+	     factory-method value should be the method in factory class which returns object -->
+	<bean id="personF" class="com.BeanConfigMethods.Person"
+		factory-method="createPerson" factory-bean="personFactory">
+		 <constructor-arg name="id" value="3"></constructor-arg>
+		 <constructor-arg name="name" value="person3"></constructor-arg>
+	</bean>
+
+	<!-- factory class bean -->
+	<bean id="personFactory" class="com.BeanConfigMethods.personFactory"></bean>
+	
+</beans>

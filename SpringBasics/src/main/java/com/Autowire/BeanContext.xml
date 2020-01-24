@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byName" default-autowire-candidates="*Writer*">
+
+	<!-- if writer needs log/file writer objects internally it creates the object needed based on auto-wire value
+	     'byType' creates object based on bean class value
+	     'byName' creates object based on bean name/id value
+	     'Constructor' creates object based on constructor of the class
+	     'default' creates object based on the value given for default-autowire in beans tag -->
+	<bean id="writerByType" class="com.Autowire.Writer"
+		autowire="byType">
+	</bean>
+	<bean id="writerByName" class="com.Autowire.Writer" autowire="byName">
+	</bean>
+	<bean id="writerByConstructor" class="com.Autowire.Writer" autowire="constructor">
+	</bean>
+	<bean id="writerByDefault" class="com.Autowire.Writer" autowire="default">
+	</bean>
+
+	<!-- beans for byType
+	 <bean id="LogWriter" class="com.Autowire.LogWriter">
+	</bean>
+	 <bean id="FileWriter" class="com.Autowire.FileWriter">
+	</bean> -->
+	
+	
+	<!-- beans for byName -->
+	<bean name="logWriter1" class="com.Autowire.LogWriter"
+		autowire-candidate="true">
+	</bean>
+	<bean id="fileWriter1" class="com.Autowire.FileWriter"
+		primary="true">
+	</bean>
+
+	<!-- use default-autowire-candidates in beans or primary=true or autowire-candidate=false options in bean
+		 to avoid confusion if multiple beans found for same class
+		 while creating objects autowire considers 
+		 beans only with the name/id mentioned in ',' separated values of default-autowire-candidates
+		 or only consider the beans with primary/autowire-candidate=true and also
+		 neglects the beans with autowire-candidate/primary=false -->
+	<bean name="duplicateLog" class="com.Autowire.LogWriter" autowire-candidate="false">
+	</bean>
+	<bean id="duplicateFile" class="com.Autowire.FileWriter" primary="false">
+	</bean>
+	
+
+</beans>

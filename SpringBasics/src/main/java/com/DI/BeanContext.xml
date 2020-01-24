@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- below bean <====> Address addressObj = new AddressObj('123 abc','hyd')-->
+	<bean id="address" class="com.DI.Address">
+		<constructor-arg name="street" value="123 abc"></constructor-arg>
+		<constructor-arg name="city" value="HYD"></constructor-arg>
+	</bean>
+	
+	<bean id="person" class="com.DI.Person">
+		<property name="id" value="01"></property>
+		<property name="name" value="first person"></property>
+		<property name="address" ref="address"></property>
+	</bean>
+
+
+</beans>
