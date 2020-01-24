@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- hardcoding some credentials and users below -->
+	 <security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="candy" authorities=""
+					password="letme" />
+				<security:user name="chandini" authorities=""
+					password="letmein" />
+			</security:user-service>
+			<!-- credentials from DB -->
+			<security:jdbc-user-service data-source-ref="dataSource"
+				users-by-username-query="select username, password, enabled from users where username=?"
+				authorities-by-username-query="select username, Authorities from Authorities where username=?" />
+		</security:authentication-provider>
+	 </security:authentication-manager>
+	
+	<!-- restricting the urls which needs login 
+		isAuthenticated() will check if user is already logged in current session on hitting the url  
+		allows if logged in or else shows login form -->
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/AddBooks" access="isAuthenticated()" />
+		<security:intercept-url pattern="/" access="permitAll" />
+		<!-- to allow the all static resources like css or images -->
+		<security:intercept-url pattern="/static/**" access="permitAll" />
+		<!-- <security:form-login login-page="/login" authentication-failure-url="/login?error=true" username-parameter="username"
+			password-parameter="password"  /> -->
+			<security:form-login />
+	</security:http>
+	
+	<!-- path for static resources like images or css files -->
+	<mvc:resources location="/resources" mapping="/static/**" />
+
+</beans>
