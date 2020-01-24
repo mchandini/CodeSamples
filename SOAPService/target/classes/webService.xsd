@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Spring-ws export .xsd to wsdl
+ WSDL URL: http://localhost:8080/ws/countries.wsdl  -->
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		targetNamespace="http://www.webservice.com/mine"
+		xmlns:tns="http://www.webservice.com/mine"
+		elementFormDefault="qualified">
+	
+	<!-- request structure -->
+	<xs:element name="getCountryRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getCurrencyRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+	</xs:element>
+ 
+ 	<!-- response Structure -->
+    <xs:element name="getCountryResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="country" type="tns:country"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="getCurrencyResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="currency" type="tns:currency"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+ 
+ 	<!-- structure of elements needed -->
+    <xs:complexType name="country">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="population" type="xs:int"/>
+            <xs:element name="capital" type="xs:string"/>
+            <xs:element name="currency" type="tns:currency"/>
+        </xs:sequence>
+    </xs:complexType>
+ 
+    <xs:simpleType name="currency">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GBP"/>
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="PLN"/>
+        </xs:restriction>
+    </xs:simpleType>
+</schema>
