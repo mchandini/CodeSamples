@@ -1,0 +1,4 @@
+com\example\demo\controller\ProductrestController.class
+com\example\demo\RestServiceProviderApplication.class
+com\example\demo\service\ProductService.class
+com\example\demo\domain\Product.class

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add Product</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<Script>
+
+function addProductDetails() {
+		var id = $("#productId").val();
+		var name = $("#productName").val();
+		console.log(id+"----"+name);
+		$.ajax({
+			  url: "http://localhost:8888/addProduct",
+			  data: {id:id,name:name},
+			  type:"POST",
+			  dataType:"json"
+			});
+		window.location.replace("/")
+	}
+</Script>
+</head>
+<body>
+		<label>Id:</label> <input type="number" id="productId"><br />
+		<label>Name:</label> <input type="text" id="productName" /><br />
+		<br />
+		<button type="submit" id="addProductButton" onClick="addProductDetails()">Add Product</button>
+</body>
+</html>
